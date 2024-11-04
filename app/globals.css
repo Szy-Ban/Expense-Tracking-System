@@ -126,3 +126,24 @@ tbody tr:hover {
 .modal button:hover {
   background-color: #00cb9f;
 }
+
+select {
+  background-color: #009879;
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 15px;
+  font-size: 0.9em;
+  cursor: pointer;
+  margin-left: 10px;
+  border: 2px #7aff7a solid;
+}
+
+select:focus {
+  outline: none;
+  background-color: #00cb9f;
+}
+
+option {
+  background-color: #ffffff;
+  color: #333333;
+}
