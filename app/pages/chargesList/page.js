@@ -17,12 +17,19 @@ export default function chargesList() {
         setSelectedCharge(null);
     };
 
+    //
+    // const hideCharge = (id) => {
+    //     setHiddenCharges([...hiddenCharges, id]);
+    // };
+
     const hideCharge = (id) => {
-        setHiddenCharges([...hiddenCharges, id]);
+        setHiddenCharges(hiddenCharges.concat(id));
     };
 
     const categories = ["Wszystkie", ...new Set(Data.map(item => item.category))];
 
+    // const uniqueCategories = Array.from(new Set(Data.map(item => item.category)));
+    // const categories = ["Wszystkie"].concat(uniqueCategories);
 
     const visibleCharges = Data.filter(item => !hiddenCharges.includes(item.id));
 
