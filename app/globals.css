@@ -27,6 +27,18 @@
   height: 100vh;
 }
 
+.table-container {
+  margin-left: 5%;
+}
+
+.charges-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
 body {
   font-family: "Bahnschrift", serif;
   justify-content: center;
@@ -147,3 +159,84 @@ option {
   background-color: #ffffff;
   color: #333333;
 }
+
+/* Stylowanie formularza */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 30%;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień */
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 30%;
+}
+
+.formContainer {
+  width: 100vh;
+  display: flex;
+}
+form h3 {
+  font-size: 1.25rem;
+  color: #009879;
+  margin-bottom: 15px;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 5px;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9em;
+  background-color: #f9f9f9;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #009879;
+  background-color: #ffffff;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #009879;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+form button[type="submit"]:hover {
+  background-color: #00cb9f;
+}
+
+
