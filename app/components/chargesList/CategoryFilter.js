@@ -1,5 +1,8 @@
-// components/chargesList/CategoryFilter.js
-export default function CategoryFilter({ categories, selectedCategory, setSelectedCategory }) {
+import { useGlobalContext } from "../context/GlobalContext";
+
+export default function CategoryFilter() {
+    const { categories, selectedCategory, setSelectedCategory } = useGlobalContext();
+
     return (
         <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
             {categories.map((category, index) => (

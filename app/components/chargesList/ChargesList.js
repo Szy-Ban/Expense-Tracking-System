@@ -1,39 +1,37 @@
-// components/chargesList/ChargesList.js
 'use client';
-import Data from "../../data/history.json";
-import styles from "../../globals.css"
-import { useState } from "react";
+import { useGlobalContext } from "../context/GlobalContext";
 import ChargeItem from "./ChargeItem";
 import ChargeDetailsModal from "./ChargeDetailsModal";
 import CategoryFilter from "./CategoryFilter";
 import AddChargeForm from "./ChargeAdder";
+import EditChargeModal from "./EditChargeModal";
+import { useState } from "react";
 
 export default function ChargesList() {
-    const [charges, setCharges] = useState(Data); // Przechowujemy listę opłat tymczasowo w stanie React
+    const {
+        filteredCharges,
+        categories,
+        selectedCategory,
+        setSelectedCategory,
+        addCharge,
+        hideCharge,
+        updateCharge,
+    } = useGlobalContext();
+
     const [selectedCharge, setSelectedCharge] = useState(null);
-    const [selectedCategory, setSelectedCategory] = useState("Wszystkie");
-    const [hiddenCharges, setHiddenCharges] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
 
     const openModal = (charge) => setSelectedCharge(charge);
     const closeModal = () => setSelectedCharge(null);
-    const hideCharge = (id) => setHiddenCharges(hiddenCharges.concat(id));
 
-    const addCharge = (newCharge) => {
-        setCharges([...charges, { ...newCharge, id: Date.now() }]); // Dodajemy nową opłatę tymczasowo do stanu
+    const openEditModal = (charge) => {
+        setSelectedCharge(charge);
+        setIsEditing(true);
     };
-
-    // const addCharge = (newCharge) => {
-    //     const updatedCharge = { id: Date.now(), title: newCharge.title, amount: newCharge.amount, category: newCharge.category, date: newCharge.date };
-    //     setCharges([...charges, updatedCharge]);
-    // };
-
-    const uniqueCategories = Array.from(new Set(charges.map(item => item.category)));
-    const categories = ["Wszystkie"].concat(uniqueCategories);
-
-    const visibleCharges = charges.filter(item => !hiddenCharges.includes(item.id));
-    const filteredCharges = selectedCategory === "Wszystkie"
-        ? visibleCharges
-        : visibleCharges.filter(item => item.category === selectedCategory);
+    const closeEditModal = () => {
+        setSelectedCharge(null);
+        setIsEditing(false);
+    };
 
     return (
         <div className="charges-container">
@@ -41,31 +39,45 @@ export default function ChargesList() {
                 <table>
                     <thead>
                     <tr>
-                        <td>Tytuł wydatku</td>
-                        <td>Kwota</td>
-                        <td>
+                        <th>Tytuł wydatku</th>
+                        <th>Kwota</th>
+                        <th>
                             <CategoryFilter
                                 categories={categories}
                                 selectedCategory={selectedCategory}
                                 setSelectedCategory={setSelectedCategory}
                             />
-                        </td>
-                        <td>Data</td>
-                        <td></td>
-                        <td></td>
+                        </th>
+                        <th>Data</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {filteredCharges.map((info, i) => (
-                        <ChargeItem key={i} info={info} openModal={openModal} hideCharge={hideCharge} />
+                    {filteredCharges.map((info) => (
+                        <ChargeItem
+                            key={info.id}
+                            info={info}
+                            openModal={openModal}
+                            hideCharge={hideCharge}
+                            openEditModal={openEditModal}
+                        />
                     ))}
                     </tbody>
                 </table>
-                {selectedCharge && (
+                {selectedCharge && !isEditing && (
                     <ChargeDetailsModal charge={selectedCharge} closeModal={closeModal} />
                 )}
+                {selectedCharge && isEditing && (
+                    <EditChargeModal
+                        charge={selectedCharge}
+                        closeModal={closeEditModal}
+                        updateCharge={updateCharge}
+                    />
+                )}
             </div>
-            <AddChargeForm onAdd={addCharge} /> {/* Przekazujemy funkcję addCharge do formularza */}
+            <AddChargeForm />
         </div>
     );
 }
