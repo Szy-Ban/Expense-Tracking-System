@@ -1,4 +1,4 @@
-export default function ChargeItem({ info, openModal, hideCharge, openEditModal }) {
+export default function ChargeItem({ info, openModal, deleteCharge, openEditModal }) {
     return (
         <tr>
             <td>{info.title}</td>
@@ -12,7 +12,7 @@ export default function ChargeItem({ info, openModal, hideCharge, openEditModal 
                 <button onClick={() => openEditModal(info)}>Edytuj</button>
             </td>
             <td>
-                <button onClick={() => hideCharge(info.id)}>Usuń</button>
+                <button onClick={() => deleteCharge(info.id)}>Usuń</button>
             </td>
         </tr>
     );

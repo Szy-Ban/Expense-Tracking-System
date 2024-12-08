@@ -5,7 +5,9 @@ import ChargeDetailsModal from "./ChargeDetailsModal";
 import CategoryFilter from "./CategoryFilter";
 import AddChargeForm from "./ChargeAdder";
 import EditChargeModal from "./EditChargeModal";
+import ExpenseFetcher from "./ExpenseFetcher";
 import { useState } from "react";
+import Pagination from "./Pagination";
 
 export default function ChargesList() {
     const {
@@ -14,7 +16,7 @@ export default function ChargesList() {
         selectedCategory,
         setSelectedCategory,
         addCharge,
-        hideCharge,
+        deleteCharge,
         updateCharge,
     } = useGlobalContext();
 
@@ -60,12 +62,13 @@ export default function ChargesList() {
                             key={info.id}
                             info={info}
                             openModal={openModal}
-                            hideCharge={hideCharge}
+                            deleteCharge={deleteCharge}
                             openEditModal={openEditModal}
                         />
                     ))}
                     </tbody>
                 </table>
+                <Pagination />
                 {selectedCharge && !isEditing && (
                     <ChargeDetailsModal charge={selectedCharge} closeModal={closeModal} />
                 )}
