@@ -1,6 +1,7 @@
 import { useGlobalContext } from "../context/GlobalContext";
 
 export default function Pagination() {
+    //ograniczenie backendem TODO
     const { currentPage, setCurrentPage, totalPages } = useGlobalContext();
 
 

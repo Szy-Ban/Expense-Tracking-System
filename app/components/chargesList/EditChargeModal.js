@@ -103,7 +103,7 @@ export default function EditChargeModal({ charge, closeModal, updateCharge }) {
                         />
                     </div>
                     <button type="submit">Zapisz</button>
-                    <button type="button" onClick={closeModal} style={{ marginLeft: '10px' }}>Anuluj</button>
+                    <button type="button" onClick={closeModal}>Anuluj</button>
                 </form>
             </div>
         </div>
